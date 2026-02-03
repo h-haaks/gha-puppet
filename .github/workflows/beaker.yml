@@ -64,6 +64,11 @@ on:
         default: ubuntu-24.04
         required: false
         type: string
+      acceptance_ruby_self_hosted:
+        description: whether to use self-hosted runners for acceptance tests ruby setup
+        default: ${{ ! startsWith(inputs.acceptance_runs_on, 'ubuntu-') }}
+        required: false
+        type: boolean
     secrets:
       beaker_hcloud_token:
         description: token to access the Hetzner Cloud API
@@ -194,7 +199,7 @@ jobs:
           bundler-cache: true
           cache-version: ${{ inputs.cache-version }}
           working-directory: ${{ inputs.working-directory }}
-          self-hosted: ${{ ! startsWith(inputs.acceptance_runs_on, 'ubuntu-') }}
+          self-hosted: ${{ inputs.acceptance_ruby_self_hosted }}
       - name: Display Ruby environment
         run: bundle env
       - name: Run tests

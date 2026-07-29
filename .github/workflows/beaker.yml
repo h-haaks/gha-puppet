@@ -69,9 +69,17 @@ on:
         default: ${{ ! startsWith(inputs.acceptance_runs_on, 'ubuntu-') }}
         required: false
         type: boolean
+      beaker_product_download_key:
+        description: The product download key to use for beaker tests
+        default: ''
+        required: false
+        type: string
     secrets:
       beaker_hcloud_token:
         description: token to access the Hetzner Cloud API
+        required: false
+      beaker_product_download_token:
+        description: The product download token to use for beaker tests
         required: false
 
 env:
@@ -161,6 +169,8 @@ jobs:
     env:
       BUNDLE_WITHOUT: development:test:release
       BEAKER_HCLOUD_TOKEN: '${{ secrets.beaker_hcloud_token }}'
+      BEAKER_PRODUCT_DOWNLOAD_KEY: '${{ inputs.beaker_product_download_key }}'
+      BEAKER_PRODUCT_DOWNLOAD_TOKEN: '${{ secrets.beaker_product_download_token }}'
     strategy:
       fail-fast: false
       matrix:

@@ -190,8 +190,8 @@ jobs:
       BUNDLE_WITHOUT: development:test:release
       BEAKER_HCLOUD_TOKEN: '${{ secrets.beaker_hcloud_token }}'
       BEAKER_STAGING_VERSION: ${{ inputs.beaker_staging_version }}
-      BEAKER_UPSTREAM_REPO_AUTH_ID: '${{ inputs.upstream_repo_auth_id }}'
-      BEAKER_UPSTREAM_REPO_AUTH_SECRET: '${{ secrets.upstream_repo_auth_secret }}'
+      BEAKER_FACTER_REPO_AUTH_ID: '${{ inputs.upstream_repo_auth_id }}'
+      BEAKER_FACTER_REPO_AUTH_SECRET: '${{ secrets.upstream_repo_auth_secret }}'
     strategy:
       fail-fast: false
       matrix:
